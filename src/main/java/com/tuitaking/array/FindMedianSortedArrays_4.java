@@ -36,7 +36,6 @@ public class FindMedianSortedArrays_4 {
     // 在小的数组中查找
     int left = 0;
     int right = num1Length;
-
     // 这里的i 表示的分隔后的在nums1上的后一位，j表示nums2在分隔后的第一位，
     // i-1 就是nums1中的左边分隔最大的数，j-1 也是nums2左边分隔最大的数，需要保证的是
     // nums[i-1]<=nums[j] && nums[j-1] <=nums[i]
