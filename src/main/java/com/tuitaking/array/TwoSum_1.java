@@ -1,6 +1,5 @@
 package com.tuitaking.array;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,10 +21,10 @@ import java.util.Map;
  * 链接：https://leetcode-cn.com/problems/two-sum
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class TwoSum_v1 {
+public class TwoSum_1 {
     public static void main(String[] args) {
         int[] nums=new int[]{3,2,4};
-        TwoSum_v1 twoSum_v1=new TwoSum_v1();
+        TwoSum_1 twoSum_v1=new TwoSum_1();
         int[] a=twoSum_v1.twoSum_v1(nums,6);
         System.out.println("asd");
     }

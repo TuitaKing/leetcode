@@ -1,7 +1,5 @@
 package com.tuitaking.array;
 
-import com.tuitaking.dp.ClimbStairs;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,10 +27,10 @@ import java.util.List;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * @author lijing
  */
-public class ThreeSum_v15 {
+public class ThreeSum_15 {
     public static void main(String[] args) {
         int[] data = new int[]{-1, 0, 1, 2, -1, -4};
-        ThreeSum_v15 threeSum_v15 = new ThreeSum_v15();
+        ThreeSum_15 threeSum_v15 = new ThreeSum_15();
         List<List<Integer>> result = threeSum_v15.threeSum_v2(data, 0);
         System.out.println(result);
     }
