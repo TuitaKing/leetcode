@@ -57,4 +57,22 @@ public class KMP {
         }
         return fail;
     }
+    private int[] genNext(String pattern){
+        int length=pattern.length();
+        int[] next=new int[length];
+        int mathLength=0;
+        int start=0;
+        while (start<length){
+            if(pattern.charAt(mathLength)==pattern.charAt(start)){
+                next[start]=mathLength+1;
+                mathLength++;
+                start++;
+            }else if(mathLength>0){
+                mathLength=next[mathLength-1];
+            }else {
+                start++;
+            }
+        }
+        return next;
+    }
 }
