@@ -34,7 +34,7 @@ public class PartitionLabels_763 {
         int last=0;
         for(int i = 0 ; i<str.length();i++){
             int left=i;
-            int right=count-1;
+            int right=count;
             while (right<str.length()){
                 if(str.charAt(left)==str.charAt(right)){
                     count=right+1;
