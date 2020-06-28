@@ -23,7 +23,9 @@ public class MergeKLists_23 {
         if(lists.length==0){
             return null;
         }
-        ForkJoinTask<ListNode> tak=new MergeAction(lists);
+//        ForkJoinTask<ListNode> tak=new MergeAction(lists);
+        ForkJoinTask<ListNode> tak=new MergeAction2(lists,0,lists.length-1);
+
         ListNode node= ForkJoinPool.commonPool().invoke(tak);
         return node;
     }
@@ -49,10 +51,10 @@ class MergeAction extends RecursiveTask<ListNode> {
                 mergeActionRight.fork();
                 ListNode leftRes= mergeActionLeft.join();
                 ListNode  rightRes=mergeActionRight.join();
-                return merge(leftRes,rightRes);
+                return mergeTwoLists(leftRes,rightRes);
             }else {
                 if(nodes.length==2){
-                  return merge(nodes[0],nodes[1]);
+                  return mergeTwoLists(nodes[0],nodes[1]);
                 }else {
                     return  nodes[0];
                 }
@@ -117,6 +119,28 @@ class MergeAction extends RecursiveTask<ListNode> {
 
         return root.next;
     }
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode head = new ListNode(0);
+        ListNode node = head;
+        while (l1 != null && l2 != null) {
+            if(l1.val < l2.val) {
+                node.next = l1;
+                l1 = l1.next;
+            } else {
+                node.next = l2;
+                l2 = l2.next;
+            }
+            node = node.next;
+        }
+
+        if(l1 != null) {
+            node.next = l1;
+        } else {
+            node.next = l2;
+        }
+
+        return head.next;
+    }
 //    private List<MergeAction> createSubMerge(){
 //            List<MergeAction> actions=new ArrayList<>();
 //            ListNode[] left=new ListNode[nodes.length/2];
@@ -127,4 +151,57 @@ class MergeAction extends RecursiveTask<ListNode> {
 //            actions.add(new MergeAction(right));
 //            return actions;
 //    }
+}
+
+class MergeAction2 extends RecursiveTask<ListNode>{
+    ListNode[] nodes;
+    int left;
+    int right;
+    public MergeAction2(ListNode[] nodes,int left,int right){
+        this.nodes=nodes;
+        this.left=left;
+        this.right=right;
+    }
+    @Override
+    protected ListNode compute() {
+
+        if(left==right){
+            return nodes[left];
+        }
+        if(right-left==1){
+            return mergeTwoLists(nodes[left],nodes[right]);
+        }
+        int mid=(left+right)/2;
+        MergeAction2 left=new MergeAction2(nodes,this.left,mid);
+        MergeAction2 right=new MergeAction2(nodes,mid+1,this.right);
+        left.fork();
+        right.fork();
+        ListNode leftRes=left.join();
+        ListNode rightRes=right.join();
+        return   mergeTwoLists(leftRes,rightRes);
+
+    }
+
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode head = new ListNode(0);
+        ListNode node = head;
+        while (l1 != null && l2 != null) {
+            if(l1.val < l2.val) {
+                node.next = l1;
+                l1 = l1.next;
+            } else {
+                node.next = l2;
+                l2 = l2.next;
+            }
+            node = node.next;
+        }
+
+        if(l1 != null) {
+            node.next = l1;
+        } else {
+            node.next = l2;
+        }
+
+        return head.next;
+    }
 }
