@@ -2,8 +2,6 @@ package com.tuitaking.array;
 
 import com.tuitaking.common.ListNode;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
