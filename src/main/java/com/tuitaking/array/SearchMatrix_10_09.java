@@ -25,6 +25,7 @@ import java.util.UUID;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class SearchMatrix_10_09 {
+    // 下面的方法主要能用于是个二位数组，切数组的行和列都是大于1的情况
     public boolean searchMatrix(int[][] matrix, int target) {
         if(matrix.length==0){
             return false;
@@ -61,5 +62,21 @@ public class SearchMatrix_10_09 {
            }
         }
         return false;
+    }
+
+    //v1
+    public boolean searchMatrix_v1(int[][] matrix, int target) {
+        int row=matrix.length-1;
+        int col=0;
+        while (row>=0 &&col<matrix[row].length ){ // 开始将col<matrix[row].length写在row>=0的前面，容易造成数组溢出！
+            if(matrix[row][col]==target){
+                return true;
+            }else  if(matrix[row][col]<target){
+                col++;
+            }else {
+                row--;
+            }
+        }
+        return  false;
     }
 }
