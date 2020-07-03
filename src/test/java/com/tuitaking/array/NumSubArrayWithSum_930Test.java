@@ -8,8 +8,8 @@ public class NumSubArrayWithSum_930Test {
     @Test
     public void test(){
         NumSubArrayWithSum_930 numSubArrayWithSum_930=new NumSubArrayWithSum_930();
-        int[] array=new int[]{10,1,1,1,0,0,1};// MockUtil.mockArray(10,120);
+        int[] array=new int[]{1,2,2,4,5,5};// MockUtil.mockArray(10,120);
         System.out.println(Utils.arratToString(array));
-        System.out.println(numSubArrayWithSum_930.numSubarraysWithSum_V1(array,2));
+        System.out.println(numSubArrayWithSum_930.subarraySum(array,9));
     }
 }

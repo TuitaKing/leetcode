@@ -86,7 +86,8 @@ public class NumSubArrayWithSum_930 {
             sum0_i += nums[i];
             // 这是我们想找的前缀和 nums[0..j]
             int sum0_j = sum0_i - k;
-            // 如果前面有这个前缀和，则直接更新答案
+            // 如果前面有这个前缀和，则直接更新答案，也就是如果前面已经有了对应的前缀p，
+            // 去掉这个前缀和就是preSum[i-1]-preSum[p]，那么从arr[p+1]+...arr[i-1]=k-preSum[p]
             if (preSum.containsKey(sum0_j))
                 ans += preSum.get(sum0_j);
             // 把前缀和 nums[0..i] 加入并记录出现次数
