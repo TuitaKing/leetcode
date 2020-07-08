@@ -7,6 +7,6 @@ public class ThreeSumMulti_923Test {
     public void test(){
         ThreeSumMulti_923 a=new ThreeSumMulti_923();
         int[] arr=new int[]{1,1,2,2,2,2};
-        System.out.println(a.threeSumMulti(arr,5));
+        System.out.println(a.threeSumMulti_v1(arr,5));
     }
 }
