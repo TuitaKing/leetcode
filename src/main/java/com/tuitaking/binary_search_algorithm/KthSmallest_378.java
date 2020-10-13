@@ -1,13 +1,16 @@
 package com.tuitaking.binary_search_algorithm;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 /**
- *给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第 k 小的元素。
+ * 给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第 k 小的元素。
  * 请注意，它是排序后的第 k 小元素，而不是第 k 个不同的元素。
  * 示例：
  * matrix = [
- *    [ 1,  5,  9],
- *    [10, 11, 13],
- *    [12, 13, 15]
+ * [ 1,  5,  9],
+ * [10, 11, 13],
+ * [12, 13, 15]
  * ],
  * k = 8,
  * 返回 13。
@@ -19,7 +22,34 @@ package com.tuitaking.binary_search_algorithm;
  */
 public class KthSmallest_378 {
     public int kthSmallest(int[][] matrix, int k) {
+        PriorityQueue<Integer> integers = new PriorityQueue<Integer>(k, new Comparator<Integer>() {
 
-        return 0;
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-02;
+            }
+        });
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                integers.add(Integer.valueOf(matrix[i][j]));
+            }
+        }
+
+        for (int i = 0; i < k - 1; i++) {
+            integers.poll();
+        }
+        return integers.poll();
+    }
+
+    public static void main(String[] args) {
+        int[][] matrix = new int[][]{
+                {1, 5, 9},
+                {10, 11, 13},
+                {12, 13, 15}
+        };
+        KthSmallest_378 kthSmallest_378 = new KthSmallest_378();
+        int res = kthSmallest_378.kthSmallest(matrix, 8);
+        System.out.println(res);
     }
 }
