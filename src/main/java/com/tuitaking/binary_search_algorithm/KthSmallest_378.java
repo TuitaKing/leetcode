@@ -22,11 +22,11 @@ import java.util.PriorityQueue;
  */
 public class KthSmallest_378 {
     public int kthSmallest(int[][] matrix, int k) {
-        PriorityQueue<Integer> integers = new PriorityQueue<Integer>(k, new Comparator<Integer>() {
+        PriorityQueue<Integer> integers = new PriorityQueue<Integer>(matrix.length*matrix[0].length, new Comparator<Integer>() {
 
             @Override
             public int compare(Integer o1, Integer o2) {
-                return o1-02;
+                return o1-o2;
             }
         });
 
@@ -39,7 +39,8 @@ public class KthSmallest_378 {
         for (int i = 0; i < k - 1; i++) {
             integers.poll();
         }
-        return integers.poll();
+        int res=integers.poll();
+        return res;
     }
 
     public static void main(String[] args) {
