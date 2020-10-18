@@ -78,6 +78,15 @@ public class KthSmallest_378 {
         return num >= k;
     }
 
+//    public int kthSmallest_v3(int[][] matrix,int k){
+//        int n= matrix.length;
+//        if(n==0){
+//            return 0;
+//        }
+//        int m=matrix[0].length;
+//
+//    }
+
 
 
     public static void main(String[] args) {
