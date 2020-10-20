@@ -30,6 +30,6 @@ package com.tuitaking.binary_search_algorithm;
 public class Intersect_350 {
 
     public int[] intersect(int[] nums1, int[] nums2) {
-
+            return null;
     }
 }
