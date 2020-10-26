@@ -39,21 +39,30 @@ import apple.laf.JRSUIUtils;
  */
 public class BalanceTree_110 {
     public boolean isBalanced(TreeNode root) {
-
-    }
-
-    private int getLeftDepth(TreeNode treeNode){
-        int left=0;
-        while (treeNode.left!=null){
-          left++;
+       if(root==null){
+           return true;
        }
-        return left;
+       return Math.abs(height(root.left) - height(root.right)) <= 1 && isBalanced(root.left) && isBalanced(root.right);
     }
-    private int getRightDepth(TreeNode treeNode){
-        int right=0;
-        while (treeNode.right!=null){
-            right++;
+    public int height(TreeNode root){
+        if(root==null){
+            return 0;
         }
-        return right;
+        return Math.max(height(root.left),height(root.right))+1;
     }
+
+    public int innerHeight(TreeNode root){
+        if (root == null) {
+            return 0;
+        }
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;
+        } else {
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+    }
+
+
 }
