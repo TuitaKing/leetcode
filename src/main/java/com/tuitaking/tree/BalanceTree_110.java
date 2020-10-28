@@ -64,5 +64,30 @@ public class BalanceTree_110 {
         }
     }
 
+   // 题目中的要求是每一个节点都需要满足他的节点左右相差不超过1。所以从底部向上遍历，后序遍历
+    // 左右树之差不超过1，则说明是平衡，反之不平衡，如何将子节点的数据向上传递呢
+    public int treeHeight(TreeNode root){
+        if(root==null){
+            return 0;
+        }
+        int left=treeHeight(root.left);
+        int right=treeHeight(root.right);
+        // -1 表示为子节点不是平衡节点
+        if(left==-1 || right==-1 || Math.abs(left-right)>1){
+            return -1;
+        }
+        // 如果子节点都是平衡节点，则计算当前节点的高度
+        return Math.max(left,right)+1;
 
+    }
+
+    public boolean isBalance_v2(TreeNode root){
+        return treeHeight(root)>-1;
+    }
+
+    public static void main(String[] args) {
+        BalanceTree_110 balanceTree_110=new BalanceTree_110();
+        boolean a= balanceTree_110.isBalance_v2(TreeNode.generateTree());
+        System.out.println(a);
+    }
 }
