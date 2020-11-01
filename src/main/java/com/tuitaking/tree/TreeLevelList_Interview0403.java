@@ -1,0 +1,74 @@
+package com.tuitaking.tree;
+
+import com.tuitaking.common.ListNode;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingDeque;
+
+/**
+ *
+ 给定一棵二叉树，设计一个算法，创建含有某一深度上所有节点的链表（比如，若一棵树的深度为 D，则会创建出 D 个链表）。返回一个包含所有深度的链表的数组。
+ 示例：
+ 输入：[1,2,3,4,5,null,7,8]
+
+ 1
+ /  \
+ 2    3
+ / \    \
+ 4   5    7
+ /
+ 8
+
+ 输出：[[1],[2,3],[4,5,7],[8]]
+
+ https://leetcode-cn.com/problems/list-of-depth-lcci/
+ */
+public class TreeLevelList_Interview0403 {
+
+    /**
+     * 从题目来看就是
+     * @param tree
+     * @return
+     */
+
+    public ListNode[] listOfDepth(TreeNode tree){
+        Queue<TreeNode> queue=new LinkedBlockingDeque();
+        queue.offer(tree);
+//        List<List<ListNode>> treeNode=new ArrayList<>();
+        List<ListNode> res=new ArrayList<>();
+        while (!queue.isEmpty()){
+            List<ListNode> treeNodes=new ArrayList<>();
+            int parentSize=queue.size();
+            for(int i = 0 ; i< parentSize;i++){
+                TreeNode parent=queue.poll();
+                res.add(new ListNode(parent.val));
+                if(parent.left!=null){
+                    queue.add(parent.left);
+                }
+                if(parent.right!=null){
+                    queue.add(parent.right);
+                }
+//                treeNode.add(treeNodes);
+            }
+
+        }
+
+        ListNode[] result=new ListNode[res.size()];
+
+        for(int i = 0 ; i< res.size();i++){
+            result[i]=res.get(i);
+        }
+
+        return result;
+
+    }
+
+   public static void main(String args[]){
+        TreeNode treeNode=TreeNode.generateTree();
+        TreeLevelList_Interview0403 treeLevelList_interview0403=new TreeLevelList_Interview0403();
+        treeLevelList_interview0403.listOfDepth(treeNode);
+   }
+
+}
