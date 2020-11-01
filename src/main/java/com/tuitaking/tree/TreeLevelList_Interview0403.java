@@ -36,32 +36,34 @@ public class TreeLevelList_Interview0403 {
     public ListNode[] listOfDepth(TreeNode tree){
         Queue<TreeNode> queue=new LinkedBlockingDeque();
         queue.offer(tree);
-//        List<List<ListNode>> treeNode=new ArrayList<>();
         List<ListNode> res=new ArrayList<>();
         while (!queue.isEmpty()){
             List<ListNode> treeNodes=new ArrayList<>();
             int parentSize=queue.size();
+            ListNode root=new ListNode(-1);
+            ListNode next=root;
             for(int i = 0 ; i< parentSize;i++){
                 TreeNode parent=queue.poll();
-                res.add(new ListNode(parent.val));
+                next.next=new ListNode(parent.val);
+                next=next.next;
                 if(parent.left!=null){
                     queue.add(parent.left);
                 }
                 if(parent.right!=null){
                     queue.add(parent.right);
                 }
-//                treeNode.add(treeNodes);
             }
+            res.add(root.next);
 
         }
 
-        ListNode[] result=new ListNode[res.size()];
+//        ListNode[] result=new ListNode[res.size()];
+//
+//        for(int i = 0 ; i< res.size();i++){
+//            result[i]=res.get(i);
+//        }
 
-        for(int i = 0 ; i< res.size();i++){
-            result[i]=res.get(i);
-        }
-
-        return result;
+        return res.toArray(new ListNode[0]);
 
     }
 
