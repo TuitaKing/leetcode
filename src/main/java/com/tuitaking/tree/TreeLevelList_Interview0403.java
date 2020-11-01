@@ -3,6 +3,7 @@ package com.tuitaking.tree;
 import com.tuitaking.common.ListNode;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -65,6 +66,30 @@ public class TreeLevelList_Interview0403 {
 
         return res.toArray(new ListNode[0]);
 
+    }
+
+
+    public ListNode[] listOfDepth_V1(TreeNode tree) {
+        List<ListNode> res = new ArrayList<>();
+        if (tree == null)
+            return new ListNode[0];
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(tree);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            ListNode dummyHead = new ListNode(-1), tail = dummyHead;
+            for (int i = 0; i < size; i++) {
+                TreeNode tn = queue.poll();
+                tail.next = new ListNode(tn.val);
+                tail = tail.next;
+                if (tn.left != null)
+                    queue.add(tn.left);
+                if (tn.right != null)
+                    queue.add(tn.right);
+            }
+            res.add(dummyHead.next);
+        }
+        return res.toArray(new ListNode[0]);
     }
 
    public static void main(String args[]){
