@@ -52,9 +52,31 @@ public class IncreaseBST_897 {
         innerBST(treeNode.right,res);
   }
 
+  public TreeNode increasingBST_withLoop(TreeNode node){
+      Deque<TreeNode> stack=new ArrayDeque<>();
+      TreeNode res=new TreeNode(-1);
+      TreeNode right=res;
+      stack.push(node);
+      TreeNode top=stack.peek();
+      while (!stack.isEmpty()){
+          if(top.left!=null ){
+              stack.push(top.left);
+              top=top.left;
+              continue;
+          }
+          top=stack.pop();
+          right.right=new TreeNode(top.val);
+          right=right.right;
+          if(top.right!=null){
+              stack.push(top.right);
+          }
+      }
+      return res.right;
+  }
+
   public static void main(String[] args) {
    TreeNode treeNode= TreeUtils.generateArrayToTree(new Integer[]{5,3,6,2,4,null,8,1,null,null,null,7,9});
    IncreaseBST_897 increaseBST_897=new IncreaseBST_897();
-   increaseBST_897.increasingBST(treeNode);
+   increaseBST_897.increasingBST_withLoop(treeNode);
   }
 }
