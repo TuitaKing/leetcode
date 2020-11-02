@@ -97,6 +97,7 @@ public class MaxBinaryTree_998 {
         TreeNode treeNode=new TreeNode(5,new TreeNode(2,null,new TreeNode(1)),new TreeNode(3));
         MaxBinaryTree_998 maxBinaryTree_998=new MaxBinaryTree_998();
         TreeNode node=maxBinaryTree_998.insertIntoMaxTree(treeNode,4);
+
         System.out.println("asd");
     }
 }
