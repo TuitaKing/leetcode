@@ -58,12 +58,6 @@ public class TreeLevelList_Interview0403 {
 
         }
 
-//        ListNode[] result=new ListNode[res.size()];
-//
-//        for(int i = 0 ; i< res.size();i++){
-//            result[i]=res.get(i);
-//        }
-
         return res.toArray(new ListNode[0]);
 
     }
