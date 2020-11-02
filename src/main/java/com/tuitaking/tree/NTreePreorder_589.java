@@ -1,7 +1,7 @@
 package com.tuitaking.tree;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * 给定一个 N 叉树，返回其节点值的前序遍历。
@@ -25,6 +25,25 @@ public class NTreePreorder_589 {
        for(Node child:root.children){
            innerPre(child,pre);
        }
+    }
+
+    public List<Integer> innerPreWithLoop(Node root){
+        Deque<Node> stack = new ArrayDeque<Node>();
+        List<Integer> res=new ArrayList<>();
+        if(root==null){
+            return Collections.emptyList();
+        }
+        stack.addFirst(root);
+        while (!stack.isEmpty()){
+            Node node=stack.pollLast();
+            res.add(node.val);
+            if(node.children!=null){
+                for(int  i = node.children.size()-1 ; i>-1 ;i--){
+                    stack.add(node.children.get(i));
+                }
+            }
+        }
+        return res;
     }
 
 }
