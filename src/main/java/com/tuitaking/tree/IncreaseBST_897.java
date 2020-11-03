@@ -52,26 +52,25 @@ public class IncreaseBST_897 {
         innerBST(treeNode.right,res);
   }
 
-  public TreeNode increasingBST_withLoop(TreeNode node){
+  public TreeNode increasingBST_withLoop(TreeNode root){
       Deque<TreeNode> stack=new ArrayDeque<>();
-      TreeNode res=new TreeNode(-1);
-      TreeNode right=res;
-      stack.push(node);
-      TreeNode top=stack.peek();
-      while (!stack.isEmpty()){
-          if(top.left!=null ){
-              stack.push(top.left);
-              top=top.left;
-              continue;
+      TreeNode tmp=new TreeNode(-1);
+      TreeNode res=tmp;
+      //List<TreeNode> treeNodes=new ArrayList<>();
+
+      TreeNode node=root;
+      while (node!=null ||!stack.isEmpty()){
+          while (node!=null){
+            stack.push(node);
+            node=node.left;
           }
-          top=stack.pop();
-          right.right=new TreeNode(top.val);
-          right=right.right;
-          if(top.right!=null){
-              stack.push(top.right);
-          }
+        node=stack.poll();
+         res.right=new TreeNode(node.val);
+         res=res.right;
+//          treeNodes.add(node);
+          node=node.right;
       }
-      return res.right;
+      return tmp.right;
   }
 
   public static void main(String[] args) {
