@@ -43,7 +43,7 @@ public class IncreaseBST_897 {
     res.add(treeNode);
     innerBST(treeNode.right, res);
   }
-
+  // 中序遍历二叉树
   public TreeNode increasingBST_withLoop(TreeNode root) {
     Deque<TreeNode> stack = new ArrayDeque<>();
     TreeNode tmp = new TreeNode(-1);
@@ -64,12 +64,51 @@ public class IncreaseBST_897 {
     }
     return tmp.right;
   }
+  // 前序遍历二叉树
+    public void pre(TreeNode node){
+      Deque<TreeNode> stack=new ArrayDeque<>();
+      stack.add(node);
+      while (!stack.isEmpty()){
+          TreeNode top=stack.poll();
+          System.out.println(top.val); //处理的函数
+          if(top.right!=null){
+              stack.push(top.right);
+          }
+          if(top.left!=null){
+              stack.push(top.left);
+          }
+      }
+
+    }
+
+    // 后序遍历二叉树
+    public void order(TreeNode head){
+        if (head == null) {
+            return;
+        }
+        Deque<TreeNode> stack1 = new ArrayDeque<>();
+        Deque<TreeNode> stack2 = new ArrayDeque<>();
+        stack1.push(head);
+        while (!stack1.isEmpty()) {
+            TreeNode node = stack1.pop();
+            stack2.push(node);
+            if (node.left != null) {
+                stack1.push(node.left);
+            }
+            if (node.right != null) {
+                stack1.push(node.right);
+            }
+        }
+        while (!stack2.isEmpty()) {
+            System.out.print(stack2.pop().val + " ");
+        }
+    }
 
   public static void main(String[] args) {
     TreeNode treeNode =
         TreeUtils.generateArrayToTree(
             new Integer[] {5, 3, 6, 2, 4, null, 8, 1, null, null, null, 7, 9});
     IncreaseBST_897 increaseBST_897 = new IncreaseBST_897();
-    increaseBST_897.increasingBST_withLoop(treeNode);
+    increaseBST_897.order(treeNode);
   }
 }
