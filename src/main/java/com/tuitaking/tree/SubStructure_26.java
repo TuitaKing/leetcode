@@ -43,13 +43,13 @@ public class SubStructure_26 {
 //    }
 
     public  static boolean isSubstructure(TreeNode root,TreeNode sub){
-        if(sub==null){
+        if(sub==null || sub.val==root.val){
             return true;
         }
         if(root==null || root.val!=sub.val){
             return false;
         }
-        return isSubstructure(root.left,sub.left)&&isSubstructure(root.right,sub.right);
+        return isSubstructure(root.left,sub.left)||isSubstructure(root.right,sub.right);
 
     }
 
@@ -57,8 +57,18 @@ public class SubStructure_26 {
         TreeNode node=  TreeUtils.generateArrayToTree(
                 new Integer[] {5, 3, 6, 2, 4, null, 8, 1, null, null, null, 7, 9});
         TreeNode node1=  TreeUtils.generateArrayToTree(
-                new Integer[] {5, 3, 6});
+                new Integer[] {3});
 
         System.out.println(isSubstructure(node,node1));
     }
+
+    public boolean isSubStructure_v2(TreeNode A, TreeNode B) {
+        return (A != null && B != null) && (recur(A, B) || isSubStructure_v2(A.left, B) || isSubStructure_v2(A.right, B));
+    }
+    boolean recur(TreeNode A, TreeNode B) {
+        if(B == null) return true;
+        if(A == null || A.val != B.val) return false;
+        return recur(A.left, B.left) && recur(A.right, B.right);
+    }
+
 }
