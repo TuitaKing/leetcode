@@ -38,24 +38,24 @@ package com.tuitaking.tree;
  */
 public class SubStructure_26 {
 
-//    public boolean isSubStructure(TreeNode A, TreeNode B) {
-//        return isSubstructure()
-//    }
+
 
     public  static boolean isSubstructure(TreeNode root,TreeNode sub){
-        if(sub==null || sub.val==root.val){
-            return true;
-        }
+        return (root !=null && sub!=null)&&(inner(root, sub)||isSubstructure(root.left,sub)||isSubstructure(root.right,sub));
+
+    }
+
+    private static boolean inner(TreeNode root,TreeNode sub){
+        if(sub==null ) return true;
         if(root==null || root.val!=sub.val){
             return false;
         }
-        return isSubstructure(root.left,sub.left)||isSubstructure(root.right,sub.right);
-
+        return inner(root.left,sub.left)&&inner(root.right,sub.right);
     }
 
     public static void main(String[] args) {
         TreeNode node=  TreeUtils.generateArrayToTree(
-                new Integer[] {5, 3, 6, 2, 4, null, 8, 1, null, null, null, 7, 9});
+                new Integer[] {1,2,3,4});
         TreeNode node1=  TreeUtils.generateArrayToTree(
                 new Integer[] {3});
 
