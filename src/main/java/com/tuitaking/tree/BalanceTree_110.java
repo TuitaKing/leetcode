@@ -34,6 +34,7 @@ package com.tuitaking.tree;
  *
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/balanced-binary-tree
+ * https://leetcode-cn.com/problems/ping-heng-er-cha-shu-lcof/submissions/
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。Tre
  */
 public class BalanceTree_110 {
