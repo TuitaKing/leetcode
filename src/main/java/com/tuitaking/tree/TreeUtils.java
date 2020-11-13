@@ -1,11 +1,8 @@
 package com.tuitaking.tree;
 
 import com.sun.org.apache.xml.internal.security.algorithms.implementations.IntegrityHmac;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+
+import java.util.*;
 
 
 public class TreeUtils {
@@ -36,6 +33,13 @@ public class TreeUtils {
       i+=1;
     }
     return q;
+  }
+
+
+  public static List<Integer> TreeNode2IntegerArray(TreeNode root){
+    List<Integer> arrays=new ArrayList<>();
+    return arrays;
+
   }
 
 
