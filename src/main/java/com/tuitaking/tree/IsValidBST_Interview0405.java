@@ -74,9 +74,24 @@ public class IsValidBST_Interview0405 {
    }
 
 
+    TreeNode pre;
+    //中序遍历
+    public boolean isValidBST_v3(TreeNode root) {
+        if(root == null) {
+            return true;
+        }
+        Boolean LFlag = isValidBST_v3(root.left);
+        if (pre != null && pre.val >= root.val) {
+            return false;
+        }
+        pre = root;
+        Boolean RFlag = isValidBST_v3(root.right);
+        return LFlag & RFlag;
+    }
+
     public static void main(String[] args) {
-        TreeNode treeNode=TreeUtils.generateArrayToTree(new Integer[]{5,1,4,null,null,3,6});
-        System.out.println(new IsValidBST_Interview0405().isValidBST_v2(treeNode));
+        TreeNode treeNode=TreeUtils.generateArrayToTree(new Integer[]{5,1,7,null,null,6,8});
+        System.out.println(new IsValidBST_Interview0405().isValidBST_v3(treeNode));
     }
 
 
