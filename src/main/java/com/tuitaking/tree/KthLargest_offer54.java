@@ -27,6 +27,8 @@ import java.util.Stack;
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ *
+ * 还是利用二叉搜索树中序遍历是递增或递减来做
  */
 public class KthLargest_offer54 {
 
