@@ -8,6 +8,9 @@ import java.util.*;
 public class TreeUtils {
 
   public static  TreeNode generateArrayToTree(Integer[] value){
+    if(value.length==0){
+      return null;
+    }
     TreeNode p = new TreeNode(value[0]);
     TreeNode q = p;
     Queue<TreeNode> queue = new LinkedList<TreeNode>();
