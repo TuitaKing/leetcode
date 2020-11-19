@@ -3,7 +3,9 @@ package com.tuitaking.tree;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 给定一个根为 root 的二叉树，每个节点的深度是 该节点到根的最短距离 。
@@ -42,6 +44,8 @@ import java.util.List;
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/smallest-subtree-with-all-the-deepest-nodes
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ *
+ * 题目翻译：查找最深的节点，如果该深度只有当前一个节点，就返回这个节点，如果有多个节点在同一个深度，就返回他们的公共祖先
  *
  * LCA？？？？
  */
@@ -91,10 +95,54 @@ public class SubTreeWithAllDeepest_865 {
         return null;
     }
 
+
+    public TreeNode subtreeWithAllDeepest_v2(TreeNode root){
+        if(root==null ){
+            return root;
+        }
+        HashMap<TreeNode,Integer> depth=new HashMap<>();
+        getDepth(root,null,depth);
+        int maxDepth=0;
+        for(TreeNode node:depth.keySet()){
+            maxDepth=Math.max(depth.get(node),maxDepth);
+        }
+        TreeNode res=answer(root,depth,maxDepth);
+        return res;
+
+    }
+    // 深度优先遍历，找到包含最深的祖父节点
+    public TreeNode answer(TreeNode node,HashMap<TreeNode,Integer> depth,int max_depth) {
+        if (node == null || depth.get(node) == max_depth)
+            return node;
+        TreeNode L = answer(node.left,depth,max_depth),
+                R = answer(node.right,depth,max_depth);
+        if (L != null && R != null) return node;
+        if (L != null) return L;
+        if (R != null) return R;
+        return null;
+    }
+
+
+
+    private void getDepth(TreeNode root,TreeNode parent,Map<TreeNode,Integer> depth){
+        if(root==null){
+            return;
+        }
+        if(parent==null){
+            depth.put(root,1);
+        }else {
+            depth.put(root,depth.get(parent)+1);
+        }
+
+        getDepth(root.left,root,depth);
+        getDepth(root.right,root,depth);
+    }
+
     public static void main(String[] args) {
 //        TreeNode treeNode=TreeUtils.generateArrayToTree(new Integer[]{3,5,1,6,2,0,8,null,null,7,4,null,null,null,null,null,null,null,13,10,null});
         TreeNode treeNode=TreeUtils.generateArrayToTree(new Integer[]{0,1,3,null,2});
-        TreeNode treeNodes=  SubTreeWithAllDeepest_865.subtreeWithAllDeepest(treeNode);
-        System.out.println(treeNodes.val);
+//        TreeNode treeNodes=  SubTreeWithAllDeepest_865.subtreeWithAllDeepest(treeNode);
+        SubTreeWithAllDeepest_865 subTreeWithAllDeepest_865=new SubTreeWithAllDeepest_865();
+        subTreeWithAllDeepest_865.subtreeWithAllDeepest_v2(treeNode);
     }
 }
