@@ -1,7 +1,9 @@
 package com.tuitaking.tree;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -93,8 +95,62 @@ public class PathSum_Interview0412 {
     }
 
 
+    //官方最快解法
+    public int pathSum_vTop1(TreeNode root, int sum) {
+        if(root == null){
+            return 0;
+        }
+        int h = dep(root);
+        int[] paths = new int[h];
+        res = 0;
+        dfs(root,sum,paths,0);
+        return res;
+    }
+    public int dep(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        return Math.max(dep(root.left),dep(root.right))+1;
+    }
+    public void dfs(TreeNode root,int sum, int[] paths, int level){
+        if(root==null){
+            return;
+        }
+        paths[level] = root.val;
+        int add = 0;
+        for(int i = level;i>=0;i--){
+            add+=paths[i];
+            if(add==sum){
+                res++;
+            }
+        }
+        dfs(root.left,sum,paths,level+1);
+        dfs(root.right,sum,paths,level+1);
+    }
 
-
+    // 回溯
+    private int count;
+    private int target;
+    private void backtrack(TreeNode root, Map<Long,Integer> preSum, long total){
+        if(root==null){
+            return;
+        }
+        total+=root.val;
+        count+=preSum.getOrDefault(total-target,0); // 先统计前缀和
+        preSum.put(total,preSum.getOrDefault(total,0)+1);
+        backtrack(root.left,preSum,total);
+        backtrack(root.right,preSum,total);
+        preSum.put(total,preSum.get(total)-1);
+        total-=root.val;
+    }
+    public int pathSum_vTop2(TreeNode root, int sum) {
+        count=0;
+        target=sum;
+        Map<Long,Integer> preSum=new HashMap<>();
+        preSum.put(0L,1); //base 等于0时加1
+        backtrack(root,preSum,0L);
+        return count;
+    }
 
     public static void main(String[] args) {
         TreeNode node=TreeUtils.generateArrayToTree(new Integer[]{5,4,8,11,null,13,4,7,2,null,null,5,1});
