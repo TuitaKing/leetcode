@@ -128,7 +128,7 @@ public class PathSum_Interview0412 {
         dfs(root.right,sum,paths,level+1);
     }
 
-    // 回溯
+    // 回溯 使用一个map来记录前缀和出现的次数
     private int count;
     private int target;
     private void backtrack(TreeNode root, Map<Long,Integer> preSum, long total){
@@ -136,11 +136,11 @@ public class PathSum_Interview0412 {
             return;
         }
         total+=root.val;
-        count+=preSum.getOrDefault(total-target,0); // 先统计前缀和
-        preSum.put(total,preSum.getOrDefault(total,0)+1);
+        count+=preSum.getOrDefault(total-target,0); // 先统计前缀和,记录到root中
+        preSum.put(total,preSum.getOrDefault(total,0)+1);// 将前缀和出现记录为1，表示当前的链路
         backtrack(root.left,preSum,total);
         backtrack(root.right,preSum,total);
-        preSum.put(total,preSum.get(total)-1);
+        preSum.put(total,preSum.get(total)-1); //清楚当前前缀和出现的次数
         total-=root.val;
     }
     public int pathSum_vTop2(TreeNode root, int sum) {
