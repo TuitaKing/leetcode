@@ -40,30 +40,37 @@ public class DelNode_1110 {
         for (int i : to_delete) {
             set.put(i, i);
         }
+        if (!set.containsKey(root.val)) {
+            res.add(root);
+        }
        // res.add(root);
         helper(root);
         return res;
     }
 
-    public void helper(TreeNode root){
+    public TreeNode helper(TreeNode root){
         if(root==null){
-            return;
+            return null;
         }
+        root.left= helper(root.left);
+        root.right=helper(root.right);
         if(root!=null && set.containsKey(root.val)){
-            res.add(root.left);
-            res.add(root.right);
-            root.left=null;
-            root.right=null;
+            if(root.left!=null){
+                res.add(root.left);
+            }
+            if(root.right!=null){
+                res.add(root.right);
+            }
+           root=null;
         }
-        helper(root.left);
-        helper(root.right);
+        return root;
 
     }
 
     public static void main(String[] args) {
         TreeNode nodes=TreeUtils.generateArrayToTree(new Integer[]{1,2,3,4,5,6,7});
         DelNode_1110 delNode_1110=new DelNode_1110();
-        delNode_1110.delNodes(nodes,new int[]{1,5});
+        delNode_1110.delNodes(nodes,new int[]{3,5});
         System.out.println("a");
     }
 }
