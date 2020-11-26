@@ -1,9 +1,7 @@
 package com.tuitaking.tree;
 
-import com.sun.tools.javac.util.Assert;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -90,6 +88,8 @@ public class CBTTree_919 {
     public TreeNode get_root() {
         return rootNode;
     }
+
+    //todo 使用满二叉树的性质，从数组中想办法？
     public static void main(String[] args) {
         TreeNode node=TreeUtils.generateArrayToTree(new Integer[]{1,2,3,4,5,6});
         CBTTree_919 cbtTree_919=new CBTTree_919(node);
