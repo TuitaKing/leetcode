@@ -46,5 +46,8 @@ public class TreeUtils {
 
 
 
+  public static boolean isLeaf(TreeNode treeNode){
+    return treeNode.left==null && treeNode.right==null;
+  }
 
 }
