@@ -1,9 +1,6 @@
 package com.tuitaking.string;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.Set;
+
 import java.util.Stack;
 
 /**
@@ -33,7 +30,7 @@ import java.util.Stack;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Calculate_Interview1626 {
-    public int calculate(String s) {
+    public static int calculate(String s) {
         char[] cs = s.trim().toCharArray();
         Stack<Integer> st = new Stack();
         int ans = 0, i = 0;
@@ -66,5 +63,11 @@ public class Calculate_Interview1626 {
         }
         while(!st.isEmpty()) ans += st.pop();
         return ans;
+    }
+
+ // todo 逆波兰
+    public static void main(String[] args) {
+        String str="3+2*2";
+        calculate(str);
     }
 }
