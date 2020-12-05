@@ -1,8 +1,10 @@
 package com.tuitaking.array;
 
+import netscape.security.UserTarget;
 import sun.jvm.hotspot.utilities.Assert;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -163,7 +165,7 @@ public class LongestSubarray_1438 {
                           }
                       }
                   }
-              }
+              }else
               if(Math.abs(max-nums[right])>limit){ //如果是当前的数减去现有的窗口中最大的值大于limit，则
                     if(nums[right]<min){
                         maxIndex=right;
@@ -204,9 +206,153 @@ public class LongestSubarray_1438 {
     }
 
 
+    public  static int longestSubarray_v4(int[] nums,int limit){
+        if(nums.length==0) return 0;
+        int left=0,right=0;
+        int minIndex=0,maxIndex=0;
+        int res=0;
+        while (right< nums.length){
+            if(Math.abs(nums[right]-nums[maxIndex])<=limit && Math.abs(nums[right]-nums[minIndex])<=limit){
+                //System.out.println("left "+left+" : "+nums[left]+" right "+right+" : "+ nums[right]+" res :" +res);
+                res=Math.max(right-left+1,res);
+                if(nums[right]>=nums[maxIndex]){
+                    maxIndex=right;
+                }else if(nums[right]<=nums[minIndex]){
+                    minIndex=right;
+                }
+            }else if(nums[right]>nums[maxIndex]){ //不符合条件有两种情况，第一种，现在的值比里面最大的大，包含的情况就是当前的值减去最小的值大于limit
+                maxIndex=right; //当前的值为最大的数字
+                int windLeft=minIndex;
+                while (windLeft<=right){ // 找到剩下的最小的数
+                  if(Math.abs(nums[right]-nums[windLeft])<=limit){
+                      left=windLeft;
+                      minIndex=getWindsMinIndex(nums,windLeft,right);
+                      if(Math.abs(nums[right]-nums[minIndex])<=limit){
+                          break;
+                      }
+                  }
+                  windLeft++;
+                }
+            }if(nums[right]<nums[minIndex]){ // 第二种情况，当前的值比窗口中最小的数还小
+                minIndex=right;
+                int windLeft=maxIndex;
+                while (windLeft<=right){
+                    if(Math.abs(nums[right]-nums[windLeft])<=limit){
+                        left=windLeft;
+                        maxIndex=getWindsMaxIndex(nums,windLeft,right);
+                        if(Math.abs(nums[right]-nums[maxIndex])<=limit){
+                          break;
+                        }
+
+                    }
+                    windLeft++;
+                }
+            }
+            right++;
+        }
+        return res;
+    }
+
+    private static int getWindsMinIndex(int[] nums,int start,int right){
+        int tempIndex=start;
+        while (start<=right){
+            if (nums[tempIndex]>=nums[start]){
+                tempIndex=start;
+            }
+            start++;
+        }
+        return tempIndex;
+    }
+
+    private static int getWindsMaxIndex(int[] nums,int start,int right){
+        int tempIndex=start;
+        while (start<=right){
+            if (nums[tempIndex]<=nums[start]){
+                tempIndex=start;
+            }
+            start++;
+        }
+        return tempIndex;
+    }
+
+
+    public static class MaxQueue {
+        private LinkedList<Integer> queue = new LinkedList<>();
+
+        public void push(int val) {
+            while (!queue.isEmpty() && queue.getLast() < val) {
+                queue.removeLast();
+            }
+            queue.addLast(val);
+        }
+
+        public void pop(int n) {
+            if (n == queue.getFirst()) {
+                queue.removeFirst();
+            }
+        }
+
+        public int getMax() {
+            return queue.getFirst();
+        }
+    }
+
+    public static class MinQueue {
+        private LinkedList<Integer> queue = new LinkedList<>();
+
+        public void push(int val) {
+            while (!queue.isEmpty() && queue.getLast() > val) {
+                queue.removeLast();
+            }
+            queue.addLast(val);
+        }
+
+        public void pop(int n) {
+            if (n == queue.getFirst()) {
+                queue.removeFirst();
+            }
+        }
+
+        public int getMin() {
+            return queue.getFirst();
+        }
+    }
+
+
+    public int longestSubarray_leetcode(int[] nums, int limit) {
+        int left = 0, right = 0;
+        int res = 0;
+        MaxQueue maxQueue = new MaxQueue();
+        MinQueue minQueue = new MinQueue();
+        while (right < nums.length) {
+            maxQueue.push(nums[right]);
+            minQueue.push(nums[right]);
+            ++right;
+            while (maxQueue.getMax() - minQueue.getMin() > limit) {
+                maxQueue.pop(nums[left]);
+                minQueue.pop(nums[left]);
+                ++left;
+            }
+            if (right - left > res) {
+                res = right - left;
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
-        LongestSubarray_1438.longestSubarray_v3(new int[]{24,12,71,33,5,87,10,11,3,58,2,97,97,36,32,35,15,80,24,45,38,9,22,21,33
-                                                         ,68,22,85,35,83,92,38,59,90,42,64,61,15,4,40,50,44,54,25,34,14,33,94,66,
-                                                          27,78,56,3,29,3,51,19,5,93,21,58,91,65,87,55,70,29,81,89,67,58,29,68,84,4,51,87,74,42,85,81,55,8,95,39},87);
+//        System.out.println( LongestSubarray_1438.longestSubarray_v4(new int[]{24,12,71,33,5,87,10,11,3,58,2,97,97,36,32,35,15,80,24,45,38,9,22,21,33
+//                                                         ,68,22,85,35,83,92,38,59,90,42,64,61,15,4,40,50,44,54,25,34,14,33,94,66,
+//                                                          27,78,56,3,29,3,51,19,5,93,21,58,91,65,87,55,70,29,81,89,67,58,29,68,84,4,51,87,74,42,85,81,55,8,95,39},87));
+//        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{8,2,4,7},4));
+//        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{10,1,2,4,7,2},5));
+    //    System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{4,2,2,2,4,4,2,2},20));
+        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{2,2,2,4,4,2,5,5,5,5,5,2},2));//6
+//        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{1,2,3,4,5,2,3,4},3));
+//        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{1,5,6,7,8,10,6,5,6},4));
+//        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{7,40,10,10,40,39,96,21,54,73,
+//                                                                             33,17,2,72,5,76,28,73,59,22,
+//                                                                             100,91,80,66,5,49,26,45,13,27,74,87,56,76,25,64,14,86,50,38,65,64,3,42,79,52,37,3,21,26,42,73,18,44,55,28,35,87},63));
+
     }
 }
