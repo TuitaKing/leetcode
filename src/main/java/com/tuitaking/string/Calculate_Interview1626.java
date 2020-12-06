@@ -30,6 +30,7 @@ import java.util.Stack;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Calculate_Interview1626 {
+    // 将-法作为加法的变种，最后将数据全部加起来就是结果
     public static int calculate(String s) {
         char[] cs = s.trim().toCharArray();
         Stack<Integer> st = new Stack();
@@ -66,8 +67,31 @@ public class Calculate_Interview1626 {
     }
 
  // todo 逆波兰
+//
+//    private int calaulate_v2(String str){
+//        Stack<String> stack=new Stack<>();
+//        int start=0;
+//        while (start<str.length()){
+//           StringBuilder sb=new StringBuilder();
+//           if(Character.isDigit(str.charAt(start))){
+//               while (Character.isDigit(str.charAt(start))){
+//                   sb.append(str.charAt(start));
+//                   start++;
+//               }
+//               stack.push(sb.toString());
+//           }else {
+//               switch (str.charAt(start)){
+//                   case '(':continue;break;
+//                   case ')':continue;break;
+//                   case '-':
+//               }
+//           }
+//
+//
+//        }
+//    }
     public static void main(String[] args) {
-        String str="3+2*2";
-        calculate(str);
+        String str="3-2*2";
+        System.out.println(calculate(str));
     }
 }
