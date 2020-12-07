@@ -1,9 +1,18 @@
 package com.tuitaking.array;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class LRU {
+    public static void main(String[] args) {
+        LRUMapWithMap<Integer,Integer> maps=new LRUMapWithMap<Integer,Integer>(2);
+        maps.put(1,1);
+        maps.put(2,2);
+        maps.put(3,3);
+        System.out.println("hellp");
+    }
 }
 
 
@@ -23,4 +32,44 @@ class LRUMap<K,V> extends LinkedHashMap<K,V>{
         return size() > capacity;
     }
 
+}
+//这种方法比上面的方法慢10倍
+class LRUMapWithMap<K,V> {
+    private int capacity;
+    private LinkedList<K> linkedList;
+    private Map<K,V> maps;
+    LRUMapWithMap(int capacity){
+        this.capacity=capacity;
+        maps=new HashMap<>();
+        linkedList=new LinkedList<>();
+    }
+
+    public V get(K key){
+        if(maps.get(key)!=null){
+            linkedList.remove(key);
+            linkedList.addLast(key);
+            return maps.get(key);
+        }
+        return null;
+    }
+
+    public void put(K key,V value){
+        V cur=maps.get(key);
+        if(cur!=null ){
+                maps.put(key,value);
+                linkedList.remove(key);
+                linkedList.addLast(key);
+
+        }else {
+
+            if(linkedList.size()>=capacity){
+                maps.remove(linkedList.pollFirst());
+                maps.put(key,value);
+                linkedList.addLast(key);
+            }else {
+                maps.put(key,value);
+                linkedList.addLast(key);
+            }
+        }
+    }
 }
