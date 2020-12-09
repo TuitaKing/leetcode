@@ -41,8 +41,52 @@ public class FindErrorNumber_645 {
         return res;
     }
 
+    //xor试一试
+    public static int[] findErrorNums_v1(int[] nums){
+        int xor=0;
+        for(int i = 1;i<nums.length+1;i++){
+            xor^=i;
+        }
+        for(int i:nums){
+            xor^=i;
+        }
+
+        int mask=1;
+        while((xor & mask) == 0) {
+            mask <<= 1;
+        }
+        int a = 0;
+        int b = 0;
+        // 将数组分成两部分，第一部分为异或位置不同位置，0或者1
+        for(int num: nums) {
+            if((num & mask) == 0) {
+                a ^= num;
+            } else {
+                b ^= num;
+            }
+        }
+        //原来的数被分成了两组，现在将1-n也分成两组，这样相同的数会被分到同一组
+        // 缺失的数会被分到另外一组。因为mask位不同
+       for(int i = 1 ; i< nums.length+1 ; i++){
+         if((i&mask)==0){
+             a^=i;
+         }else {
+             b^=i;
+         }
+       }
+       // 将1-n
+       for(int i = 0 ; i<nums.length;i++){
+           if(a==nums[i]){
+               return new int[]{a,b};
+           }
+       }
+      return new int[]{b, a};
+    }
+
     public static void main(String[] args) {
         int[] arr = FindErrorNumber_645.findErrorNums(new int[]{3,3,1});
+        int[] arr1 = FindErrorNumber_645.findErrorNums_v1(new int[]{3,3,1});
+        int[] arr2 = FindErrorNumber_645.findErrorNums_v1(new int[]{1,2,2,4});
         System.out.println("a");
     }
 }
