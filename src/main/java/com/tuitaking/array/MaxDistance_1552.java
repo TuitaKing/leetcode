@@ -44,8 +44,8 @@ public class MaxDistance_1552 {
 
 
 
-   // 最小的磁力为相邻小球，判断的应该是相邻之间的磁力是否都大于当前居中的磁力，而且能够放下所有的小球，如果是，则说明当前的磁力过小
-
+    // 该方法主要是检查当前选择的距离是否能够放下，如果能够放下，说明可能的位置在右边，如果不能放下，则说明可能的位置在左边
+    // 该解法其实是将结果作为二分查找的方法，先选择结果，在看是否有合适的数
     public boolean check(int x, int[] position, int m) {
         int pre = position[0], cnt = 1;
         for (int i = 1; i < position.length; ++i) {
