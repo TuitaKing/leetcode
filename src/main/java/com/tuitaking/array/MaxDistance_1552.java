@@ -42,6 +42,10 @@ public class MaxDistance_1552 {
         return ans;
     }
 
+
+
+   // 最小的磁力为相邻小球，判断的应该是相邻之间的磁力是否都大于当前居中的磁力，而且能够放下所有的小球，如果是，则说明当前的磁力过小
+
     public boolean check(int x, int[] position, int m) {
         int pre = position[0], cnt = 1;
         for (int i = 1; i < position.length; ++i) {
@@ -80,5 +84,10 @@ public class MaxDistance_1552 {
             }
         }
         return res>=m;
+    }
+
+    public static void main(String[] args) {
+        MaxDistance_1552 maxDistance_1552=new MaxDistance_1552();
+        maxDistance_1552.maxDistance(new int[]{1,2,3,4,5,10000},2);
     }
 }
