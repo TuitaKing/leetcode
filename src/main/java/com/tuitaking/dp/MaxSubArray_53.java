@@ -45,4 +45,39 @@ public class MaxSubArray_53 {
         }
         return max;
     }
+
+    public int maxSubArray_v2(int[] nums){
+        if(nums.length==1){
+            return nums[0];
+        }
+        int[] preSum=new int[nums.length];
+        preSum[0]=nums[0];
+        int min=Math.min(preSum[0],0);
+        int max=0;
+        for(int i=1;i<nums.length;i++){
+            preSum[i]=nums[i]+preSum[i-1];
+            max=Math.max(preSum[i]-min,max);
+            min=Math.min(min,preSum[i]);
+        }
+        return max;
+    }
+
+    public int maxSubArray_pre(int[] nums) {
+        int len = nums.length;
+        int[] pf = new int[len+1];
+        for(int i = 1; i < len+1; i++) {
+            pf[i] = nums[i-1] + pf[i-1];
+
+        }
+        int min = Math.min(nums[0], 0);
+        // int mind = 0;
+        int ans = nums[0];
+        for(int i = 1; i < len; i++) {
+            int pfs = pf[i+1] - min;
+            ans = Math.max(ans, pfs);
+            if(pf[i+1] < min) min = pf[i+1];
+
+        }
+        return ans;
+    }
 }
