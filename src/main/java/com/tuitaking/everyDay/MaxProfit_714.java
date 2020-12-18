@@ -42,7 +42,7 @@ public class MaxProfit_714 {
             } else if (prices[i] == Math.max(leftMax, prices[i])) {
                 leftMax = prices[i];
                 for (int j = i + 1; j < prices.length; j++) {
-                    if (prices[j] >= leftMax) {
+                    if (prices[j] > leftMax) {
                         leftMax = prices[j];
                         i = j;
                         continue;
@@ -54,12 +54,12 @@ public class MaxProfit_714 {
         //1, 5, 2, 8, 4, 9
             if (leftMax - leftMin - fee > 0) {
 
-                if(preMin!=0&&((leftMax - leftMin - fee)+preRes)<(leftMax-preMin-fee)){
-                    res+=leftMax-preMin-fee-preRes;
-                }else{
-                    res += leftMax - leftMin - fee;
-                }
-
+//                if(preMin!=0&&((leftMax - leftMin - fee)+preRes)<(leftMax-preMin-fee)){
+//                    res+=leftMax-preMin-fee-preRes;
+//                }else{
+//                    res += leftMax - leftMin - fee;
+//                }
+                res += leftMax - leftMin - fee;
                // System.out.println("leftMax: "+leftMax+ " leftMin: "+leftMin+" preMin: "+preMin+" preRes: "+preRes+ " res :"+res);
             }
             preRes = leftMax - leftMin - fee;
@@ -82,17 +82,17 @@ public class MaxProfit_714 {
         }
         return dp[n - 1][0];
     }
-
+    //1, 5, 6, 8, 4, 9
     public int maxProfit_fast(int[] prices, int fee) {
         int n = prices.length;
         int buy = prices[0] + fee;
         int profit = 0;
         for (int i = 1; i < n; ++i) {
-            if (prices[i] + fee < buy) {
+            if (prices[i] + fee < buy) {  // 如果当前买的价格小于原来的价格，就在当前买入，
                 buy = prices[i] + fee;
-            } else if (prices[i] > buy) {
+            } else if (prices[i] > buy) {  // 有获利的时候就卖出
                 profit += prices[i] - buy;
-                buy = prices[i];
+                buy = prices[i];           //当前 卖出后，假定没有卖出，所以他的buy价格只是当前的值。下次获利更高的话，就可以按照第一次买入的价格卖出。
             }
         }
         return profit;
