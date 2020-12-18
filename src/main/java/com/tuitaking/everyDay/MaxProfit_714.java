@@ -51,7 +51,7 @@ public class MaxProfit_714 {
                     }
                 }
             }
-        //1, 5, 2, 8, 4, 9
+            //1, 5, 2, 8, 4, 9
             if (leftMax - leftMin - fee > 0) {
 
 //                if(preMin!=0&&((leftMax - leftMin - fee)+preRes)<(leftMax-preMin-fee)){
@@ -60,7 +60,7 @@ public class MaxProfit_714 {
 //                    res += leftMax - leftMin - fee;
 //                }
                 res += leftMax - leftMin - fee;
-               // System.out.println("leftMax: "+leftMax+ " leftMin: "+leftMin+" preMin: "+preMin+" preRes: "+preRes+ " res :"+res);
+                // System.out.println("leftMax: "+leftMax+ " leftMin: "+leftMin+" preMin: "+preMin+" preRes: "+preRes+ " res :"+res);
             }
             preRes = leftMax - leftMin - fee;
             preMin = leftMin;
@@ -70,6 +70,21 @@ public class MaxProfit_714 {
         }
         return res;
     }
+
+    public int maxProfit_my_v1(int[] prices, int fee) {
+        int min = prices[0];
+        int res = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < min) {
+                min = prices[i];
+            } else if (prices[i] - min - fee > 0) {
+                res += prices[i] - min - fee;
+                min = prices[i] - fee; //如果没有卖出的话，下次在卖的价格应该是当前的价格减去手续费
+            }
+        }
+        return res;
+    }
+
 
     public int maxProfit_v1(int[] prices, int fee) {
         int n = prices.length;
@@ -82,6 +97,7 @@ public class MaxProfit_714 {
         }
         return dp[n - 1][0];
     }
+
     //1, 5, 6, 8, 4, 9
     public int maxProfit_fast(int[] prices, int fee) {
         int n = prices.length;
