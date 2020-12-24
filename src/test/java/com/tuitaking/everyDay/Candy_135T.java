@@ -14,8 +14,8 @@ public class Candy_135T {
             int[] temp= MockUtil.mockArray(i);
             System.out.println(Arrays.toString(temp));
 //            System.out.println(candy_135.candy_2(temp));
-            Assert.assertEquals(candy_135.candy(temp),candy_135.candy_2(temp));
+            Assert.assertEquals(candy_135.candy(temp),candy_135.candy_v1(temp));
         }
-        candy_135.candy_2(new int[]{33, 88, 61, 10, 74});
+        candy_135.candy(new int[]{33, 88, 61, 10, 74});
     }
 }
