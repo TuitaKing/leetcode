@@ -19,8 +19,9 @@ package com.tuitaking.point2offer;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class HammingWeight_15 {
-    public int hammingWeight(int n) {
+    public int hammingWeight(long n) {
         int res=0;
+        System.out.println( Long.toBinaryString(n));
         // 使用这种方式，如果是32的好像会出问题
         for (int i = 0; i < 32; i++) {
             if(n%2==1){
