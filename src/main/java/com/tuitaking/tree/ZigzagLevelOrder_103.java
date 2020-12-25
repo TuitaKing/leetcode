@@ -1,9 +1,7 @@
 package com.tuitaking.tree;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,15 +26,18 @@ import java.util.List;
  *
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal
+ *
+ * https://leetcode-cn.com/problems/cong-shang-dao-xia-da-yin-er-cha-shu-iii-lcof/submissions/
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class ZigzagLevelOrder_103 {
 
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         if(root==null){
-            Collections.emptyList();
+           return Collections.emptyList();
         }
-        Deque<TreeNode> treeNodes=new ArrayDeque<>();
+       // Deque<TreeNode> treeNodes=new ArrayDeque<>();
+        LinkedList<TreeNode> treeNodes=new LinkedList<>(); // linked 会比array 快很多
         treeNodes.add(root);
         List<List<Integer>> res=new ArrayList<>();
         boolean left=true;
