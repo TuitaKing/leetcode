@@ -1,2 +1,3 @@
-package com.tuitaking.stack;public class LargestRectangleArea {
+package com.tuitaking.stack;
+public class LargestRectangleArea_84 {
 }
