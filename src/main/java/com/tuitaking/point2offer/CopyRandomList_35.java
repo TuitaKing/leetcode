@@ -12,7 +12,7 @@ public class CopyRandomList_35 {
     public Node copyRandomList(Node head) {
         Node tmp = head;
         while (tmp != null) {
-            Node cur = new Node(tmp.val);
+            Node cur = new Node(tmp.val+1);
             cur.next = tmp.next;
             tmp.next = cur;
             tmp = cur.next;
@@ -26,18 +26,21 @@ public class CopyRandomList_35 {
         tail = tmp.next;
         Node result=tail;
         while (tail!=null&&tail.next != null) {
+            tmp.next=tail.next;
+            tmp=tmp.next;
             tail.next = tail.next.next;
             tail=tail.next;
         }
+        tmp.next=null;
         return result;
     }
 
     public static void main(String[] args) {
         Node node1=new Node(1);
-        Node node2=new Node(2);
-        Node node3=new Node(3);
-        Node node4=new Node(4);
-        Node node5=new Node(5);
+        Node node2=new Node(3);
+        Node node3=new Node(5);
+        Node node4=new Node(7);
+        Node node5=new Node(9);
         node1.next=node2;
         node2.next=node3;
         node3.next=node4;

@@ -48,7 +48,7 @@ public class IncreaseBST_897 {
     Deque<TreeNode> stack = new ArrayDeque<>();
     TreeNode tmp = new TreeNode(-1);
     TreeNode res = tmp;
-    // List<TreeNode> treeNodes=new ArrayList<>();
+     List<TreeNode> treeNodes=new ArrayList<>();
 
     TreeNode node = root;
     while (node != null || !stack.isEmpty()) {
@@ -57,9 +57,9 @@ public class IncreaseBST_897 {
         node = node.left;
       }
       node = stack.poll();
-      res.right = new TreeNode(node.val);
-      res = res.right;
-      //          treeNodes.add(node);
+//      res.right = new TreeNode(node.val);
+//      res = res.right;
+      treeNodes.add(node);
       node = node.right;
     }
     return tmp.right;
@@ -109,6 +109,6 @@ public class IncreaseBST_897 {
         TreeUtils.generateArrayToTree(
             new Integer[] {5, 3, 6, 2, 4, null, 8, 1, null, null, null, 7, 9});
     IncreaseBST_897 increaseBST_897 = new IncreaseBST_897();
-    increaseBST_897.order(treeNode);
+    increaseBST_897.increasingBST_withLoop(treeNode);
   }
 }
