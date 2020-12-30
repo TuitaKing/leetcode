@@ -1,11 +1,7 @@
 package com.tuitaking.array;
 
-import netscape.security.UserTarget;
-import sun.jvm.hotspot.utilities.Assert;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * 给你一个整数数组 nums ，和一个表示限制的整数 limit，请你返回最长连续子数组的长度，该子数组中的任意两个元素之间的绝对差必须小于或者等于 limit 。
@@ -340,19 +336,5 @@ public class LongestSubarray_1438 {
         return res;
     }
 
-    public static void main(String[] args) {
-//        System.out.println( LongestSubarray_1438.longestSubarray_v4(new int[]{24,12,71,33,5,87,10,11,3,58,2,97,97,36,32,35,15,80,24,45,38,9,22,21,33
-//                                                         ,68,22,85,35,83,92,38,59,90,42,64,61,15,4,40,50,44,54,25,34,14,33,94,66,
-//                                                          27,78,56,3,29,3,51,19,5,93,21,58,91,65,87,55,70,29,81,89,67,58,29,68,84,4,51,87,74,42,85,81,55,8,95,39},87));
-//        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{8,2,4,7},4));
-//        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{10,1,2,4,7,2},5));
-    //    System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{4,2,2,2,4,4,2,2},20));
-        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{2,2,2,4,4,2,5,5,5,5,5,2},2));//6
-//        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{1,2,3,4,5,2,3,4},3));
-//        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{1,5,6,7,8,10,6,5,6},4));
-//        System.out.println(LongestSubarray_1438.longestSubarray_v4(new int[]{7,40,10,10,40,39,96,21,54,73,
-//                                                                             33,17,2,72,5,76,28,73,59,22,
-//                                                                             100,91,80,66,5,49,26,45,13,27,74,87,56,76,25,64,14,86,50,38,65,64,3,42,79,52,37,3,21,26,42,73,18,44,55,28,35,87},63));
 
-    }
 }

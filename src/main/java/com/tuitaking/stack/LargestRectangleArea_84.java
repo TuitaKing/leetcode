@@ -1,5 +1,4 @@
 package com.tuitaking.stack;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -23,47 +22,47 @@ import java.util.Deque;
 public class LargestRectangleArea_84 {
     // sorry ,it's my stupid idea;
     public int largestRectangleArea(int[] heights) {
-        if(heights.length==0){
+        if (heights.length == 0) {
             return 0;
         }
-        Deque<Integer> stack=new ArrayDeque<>();
-        int max=0;
-        int min=Integer.MAX_VALUE;
-        for(int i = 0 ; i< heights.length;i++){
-            min=Math.min(min,heights[i]);
-            max=Math.max(max,heights[i]);
-            if(stack.isEmpty()){
+        Deque<Integer> stack = new ArrayDeque<>();
+        int max = 0;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < heights.length; i++) {
+            min = Math.min(min, heights[i]);
+            max = Math.max(max, heights[i]);
+            if (stack.isEmpty()) {
                 stack.push(i);
-            }else {
-               if(heights[stack.peek()]<heights[i]){
-                   max=Math.max(Math.min(heights[i],heights[stack.peek()])*(i-stack.peek()+1),max);
-                   stack.push(i);
-               }else {
-                   while (!stack.isEmpty()){
-                        int start=stack.pop();
-                        max=Math.max(Math.min(heights[i],heights[start])*(i-start+1),max);
-                   }
-               }
+            } else {
+                if (heights[stack.peek()] < heights[i]) {
+                    max = Math.max(Math.min(heights[i], heights[stack.peek()]) * (i - stack.peek() + 1), max);
+                    stack.push(i);
+                } else {
+                    while (!stack.isEmpty()) {
+                        int start = stack.pop();
+                        max = Math.max(Math.min(heights[i], heights[start]) * (i - start + 1), max);
+                    }
+                }
             }
         }
-        max= Math.max(min*heights.length,max);
+        max = Math.max(min * heights.length, max);
         return max;
     }
+
     // 暴力
     public int largestRectangleArea_v1(int[] heights) {
-        int max=0;
-        for(int i = 0 ; i < heights.length;i++){
-            int min=heights[i];
-            for(int j = i ; j< heights.length;j++){
-                min=Math.min(min,heights[j]);
-                max=Math.max(min*(j-i+1),max);
+        int max = 0;
+        for (int i = 0; i < heights.length; i++) {
+            int min = heights[i];
+            for (int j = i; j < heights.length; j++) {
+                min = Math.min(min, heights[j]);
+                max = Math.max(min * (j - i + 1), max);
             }
         }
-       return max;
+        return max;
     }
 
     /**
-     *
      * @param heights
      * @return
      */
