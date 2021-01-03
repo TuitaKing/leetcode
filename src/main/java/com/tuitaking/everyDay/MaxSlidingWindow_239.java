@@ -68,20 +68,17 @@ public class MaxSlidingWindow_239 {
 
 
     public int[] maxSlidingWindow_v(int[] nums, int k) {
-        LinkedList<Integer> queue=new LinkedList<>();
-        int[] res=new int[nums.length-k+1];
-        for(int i = 0 ; i< nums.length;i++){
-            while (!queue.isEmpty()&&nums[queue.peek()]<=nums[i]){
-                queue.pollLast();
-            }
-            queue.addLast(nums[i]);
-            if(queue.peek() <= i-k){
-                queue.poll();
-            }
-            // 当窗口长度为k时 保存当前窗口中最大值
-            if(i+1 >= k){
-                res[i+1-k] = nums[queue.peek()];
-            }
+        if(nums.length == 0 || k == 0) return new int[0];
+        Deque<Integer> deque = new LinkedList<>();
+        int[] res = new int[nums.length - k + 1];
+        for(int j = 0, i = 1 - k; j < nums.length; i++, j++) {
+            if(i > 0 && deque.peekFirst() == nums[i - 1])
+                deque.removeFirst(); // 删除 deque 中对应的 nums[i-1]
+            while(!deque.isEmpty() && deque.peekLast() < nums[j])
+                deque.removeLast(); // 保持 deque 递减
+            deque.addLast(nums[j]);
+            if(i >= 0)
+                res[i] = deque.peekFirst();  // 记录窗口最大值
         }
         return res;
     }
