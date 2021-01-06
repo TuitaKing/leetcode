@@ -23,6 +23,7 @@ import java.util.HashMap;
  */
 public class LengthOfLongestSubstring_48 {
     // 开始忘记记录当前如果满足的时候也是需要计算最大值的 比如ab
+
     public int lengthOfLongestSubstring(String s) {
         if(s==null || s.length()==0){
             return 0;
