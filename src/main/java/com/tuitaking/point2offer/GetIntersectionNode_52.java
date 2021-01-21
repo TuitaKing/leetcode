@@ -5,7 +5,7 @@ import com.tuitaking.common.ListNode;
 import java.util.List;
 
 /**
- * 输入两个链表，找出它们的第一个公共节点。
+ * 输入两个R链表，找出它们的第一个公共节点。
  * 如下面的两个链表：
  * 在节点 c1 开始相交。
  * 示例 1：
